@@ -17,46 +17,52 @@
   <body>
     <img id="snail" src="snail.png" alt="snail image" width="100px" />
     <script>
+      //Variables
       let snail = document.querySelector("#snail");
       let x = 0;
       let y = 0;
       let speed = 10;
       let windowWidth = window.innerWidth;
       let windowHeight = window.innerHeight;
+      //Functions
+      const rotateSnail = (degrees) => {
+        snail.style.transform = `rotate(${degrees}deg)`;
+      };
 
       document.addEventListener("keydown", (e) => {
-        if (e.keyCode === 37) {
-          //left
-          if (x > 0) {
-            x -= speed;
-            console.log(x);
-            snail.style.left = x + "px";
-            snail.style.transform = "rotate(180deg)";
-          }
-        } else if (e.keyCode === 38) {
-          //up
-          if (y > 0) {
-            y -= speed;
-            console.log(y);
-            snail.style.top = y + "px";
-            snail.style.transform = "rotate(270deg)";
-          }
-        } else if (e.keyCode === 39) {
-          //right
-          if (x + 100 < windowWidth) {
-            x += speed;
-            console.log(x);
-            snail.style.left = x + "px";
-            snail.style.transform = "rotate(0deg)";
-          }
-        } else if (e.keyCode === 40) {
-          //down
-          if (y + 100 < windowHeight) {
-            y += speed;
-            console.log(y);
-            snail.style.top = y + "px";
-            snail.style.transform = "rotate(90deg)";
-          }
+        switch (e.keyCode) {
+          //arrow left
+          case 37:
+            if (x > 0) {
+              x -= speed;
+              snail.style.left = x + "px";
+              rotateSnail(180);
+            }
+            break;
+          //arrow up
+          case 38:
+            if (y > 0) {
+              y -= speed;
+              snail.style.top = y + "px";
+              rotateSnail(270);
+            }
+            break;
+          //arrow right
+          case 39:
+            if (x + 100 < windowWidth) {
+              x += speed;
+              snail.style.left = x + "px";
+              rotateSnail(0);
+            }
+            break;
+          //arrow down
+          case 40:
+            if (y + 100 < windowHeight) {
+              y += speed;
+              snail.style.top = y + "px";
+              rotateSnail(90);
+            }
+            break;
         }
       });
     </script>
